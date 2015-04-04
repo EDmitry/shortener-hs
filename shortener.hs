@@ -16,7 +16,7 @@ shorten = shorten' (['a'..'z'] ++ ['A'..'Z'] ++ ['0'..'9'])
 shorten' :: String -> String -> Int -> String
 shorten' charset url len = toCharset charset (convertToBase urlhash ((fromIntegral . length) charset))
   where
-    urlhash = md5i (Str url) `mod` fromIntegral (length charset ^ len)
+    urlhash = md5i (Str url) `mod` (fromIntegral (length charset) ^ len)
 
     toCharset :: Integral a => String -> [a] -> String
     toCharset ch = map ((ch!!) . fromIntegral)
